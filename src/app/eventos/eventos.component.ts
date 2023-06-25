@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { EventoService } from '../services/evento.service';
 import { Evento } from '../models/Evento';
@@ -23,11 +24,13 @@ export class EventosComponent implements OnInit {
   private _filtroLista: string = '';
 
   constructor(
-    private eventoService: EventoService, 
+    private eventoService: EventoService,
     private modalService: BsModalService,
-    private toastr: ToastrService) {}
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.GetAllEventos();
   }
 
@@ -56,13 +59,17 @@ export class EventosComponent implements OnInit {
   }
 
   public async GetAllEventos(): Promise<void> {
-    await this.eventoService.getEventos().then((_eventos: Evento[]) => {
-      this.eventos = _eventos
-      this.eventosFiltrados = this.eventos
-    });
+    const _eventos: Evento[] = await this.eventoService.getEventos();
+    if (_eventos == null) {
+      this.spinner.hide();
+      this.toastr.error('Erro ao carregar Eventos', 'Error!');
+    }
+    this.eventos = _eventos;
+    this.eventosFiltrados = this.eventos;
+    this.spinner.hide();
   }
 
-  public openModal(template: TemplateRef<any>) : void {
+  public openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 

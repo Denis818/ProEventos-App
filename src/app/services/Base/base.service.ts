@@ -6,14 +6,27 @@ export abstract class BaseService {
   constructor() { }
 
   async SendHttpRequest(metodo: string, url: string, dados = null, contentType = null) {
-    const response = await fetch(url, {
-      method: metodo,
-      headers: {
-        'Content-Type': contentType ?? 'application/json',
-      },
-      body: dados
-    }).then(response => response.json()).catch(error => console.log(error.json()));
+    try {
+      const response = await fetch(url, {
+        method: metodo,
+        headers: {
+          'Content-Type': contentType ?? 'application/json',
+        },
+        body: dados
+      });
 
-    return response;
+      const data = await response.json();
+
+      if (!response.ok){
+        console.log(data);
+        return;
+      }       
+
+      return data;
+    }
+    catch (error) {
+      console.log(error);
+      return;
+    }
   }
 }
