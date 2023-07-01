@@ -18,15 +18,13 @@ export abstract class BaseService {
       const data = await response.json();
 
       if (!response.ok){
-        console.log(data);
-        return;
+        console.log(data);    
       }       
 
       return data;
     }
     catch (error) {
       console.log(error);
-      return;
     }
   }
 }
