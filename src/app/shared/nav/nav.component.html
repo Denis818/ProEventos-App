@@ -1,12 +1,14 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" *ngIf="showMenu()">
+<nav class="navbar navbar-expand-lg shadow-sm" *ngIf="showMenu()">
   <div class="container">
     <a class="navbar-brand" routerLink="dashboard">
       <i class="fa fa-users mb-2"></i>
     </a>
-    <button class="navbar-toggler" (click)="isCollapsed = !isCollapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+
+    <button class="navbar-toggler white-icon" (click)="isCollapsed = !isCollapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" [collapse]="isCollapsed" [isAnimated]="true" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" routerLinkActive="active">
@@ -18,14 +20,22 @@
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="contatos">Contatos</a>
         </li>
-      </ul>
+      </ul>   
 
       <ul class="navbar-nav">
         <li class="nav-item dropdown" dropdown>
-          <a dropdownToggle class="nav-link dropdown-toggle" style="cursor: pointer;" id="navbarDropdownMenuLink" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Denis
-          </a>
+          <div class="d-flex justify-content-between align-items-center">
+            <a dropdownToggle class="nav-link dropdown-toggle" style="cursor: pointer;" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Denis
+            </a>
+            <a class="ml-5 mr-3" (click)="setDarkMode(!darkMode)">
+              <i *ngIf="darkMode; else sunIcon" class="fas fa-moon"></i> <!-- mostra a lua se darkMode é verdadeiro -->
+              <ng-template #sunIcon>
+                <i class="fas fa-sun"></i> <!-- mostra o sol se darkMode é falso -->
+              </ng-template>
+            </a>
+          </div>
           <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" routerLink="user/perfil"
               Perfil>
@@ -39,6 +49,8 @@
           </div>
         </li>
       </ul>
+    
+
     </div>
   </div>
 </nav>
