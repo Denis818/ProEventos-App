@@ -3,8 +3,8 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { EventoService } from 'src/app/services/evento.service';
-import { Evento } from 'src/app/models/Evento';
+import { EventoService } from '@app/services/evento.service';
+import { Evento } from '@app/models/Evento';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./evento-lista.component.scss']
 })
 export class EventoListaComponent {
-  modalRef?: BsModalRef;
+  modalRef: BsModalRef;
   public larguraImagem: number = 150;
   public margemImagem: number = 2;
   public exibirImagem: boolean = true;

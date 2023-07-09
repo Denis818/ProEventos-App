@@ -5,7 +5,7 @@ export abstract class BaseService {
 
   constructor() { }
 
-  async SendHttpRequest(metodo: string, url: string, dados = null, contentType = null) {
+  async SendHttpRequest(metodo: string, url: string, dados: any = null, contentType: any = null) {
     try {
       const response = await fetch(url, {
         method: metodo,
