@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidatorField } from '@app/helpers/ValidatorField';
 
 @Component({
   selector: 'app-perfil',
@@ -21,6 +22,11 @@ export class PerfilComponent implements OnInit {
   }
 
   private validation(): void {
+
+    const formOptions: AbstractControlOptions = {
+      validators: ValidatorField.MustMatch('senha', 'confirmeSenha')
+    };
+    
     this.form = this.fb.group({
       titulo: ['', Validators.required],
       primeiroNome: ['', Validators.required],
@@ -29,9 +35,9 @@ export class PerfilComponent implements OnInit {
       telefone: ['', [Validators.required, Validators.pattern('^[0-9 ()-]+$')]],
       funcao: ['', Validators.required],
       descricao: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
-      senha: ['', [Validators.required, Validators.minLength(5)]],
+      senha: ['', [Validators.required, Validators.minLength(6)]],
       confirmeSenha: ['', Validators.required]
-    })
+    }, formOptions)
   }
 
   public resetForm(): void {

@@ -156,7 +156,7 @@
 							Senha é obrigatório.
 						</div>
 						<div *ngIf=" f.senha.errors?.minlength" class="invalid-feedback">
-							Senha deve ter no mínimo 5 caracteres
+							Deve conter no mínimo 6 caracteres.
 						</div>
 					</div>
 					<div class="form-group col-sm">
@@ -167,6 +167,9 @@
 
 						<div *ngIf=" f.confirmeSenha.errors?.required" class="invalid-feedback">
 							Confirmar Senha é obrigatório.
+						</div>
+						<div *ngIf=" f.confirmeSenha.errors?.mustMatch" class="invalid-feedback">
+							Senhas estão diferentes.
 						</div>
 					</div>
 				</div>
