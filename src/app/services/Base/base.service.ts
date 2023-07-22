@@ -1,30 +1,26 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export abstract class BaseService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  async SendHttpRequest(metodo: string, url: string, dados: any = null, contentType: any = null) {
-    try {
-      const response = await fetch(url, {
-        method: metodo,
-        headers: {
-          'Content-Type': contentType ?? 'application/json',
-        },
-        body: dados
-      });
+  SendHttpRequest(metodo: string, url: string, dados: any = null, contentType: any = null): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': contentType ?? 'application/json',
+    });
 
-      const data = await response.json();
-
-      if (!response.ok){
-        console.log(data);    
-      }       
-
-      return data;
-    }
-    catch (error) {
-      console.log(error);
-    }
+    return this.http.request(metodo, url, {
+      body: dados,
+      headers: headers
+    }).pipe(
+      catchError((error: any) => {
+        console.error('Ocorreu um erro:', error);
+        return throwError(() => error);
+      })
+    );
   }
 }

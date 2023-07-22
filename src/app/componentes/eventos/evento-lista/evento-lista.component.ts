@@ -6,6 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { EventoService } from '@app/services/evento.service';
 import { Evento } from '@app/models/Evento';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-evento-lista',
@@ -58,15 +59,19 @@ export class EventoListaComponent {
     this.exibirImagem = !this.exibirImagem;
   }
 
-  public async GetAllEventos(): Promise<void> {
-    const _eventos: Evento[] = await this.eventoService.getEventos();
-    if (_eventos == null) {
-      this.spinner.hide();
-      this.toastr.error('Erro ao carregar Eventos', 'Error!');
-    }
-    this.eventos = _eventos;
-    this.eventosFiltrados = this.eventos;
-    this.spinner.hide();
+  public GetAllEventos(): void {
+    this.eventoService.getEventos().subscribe({
+      next: eventos => {
+        this.eventos = eventos;
+        
+        this.eventosFiltrados = this.eventos;
+        this.spinner.hide();
+      },
+      error: error => {
+        this.spinner.hide();
+        this.toastr.error('Erro ao carregar Eventos', 'Error!');
+      }
+    });
   }
 
   public openModal(template: TemplateRef<any>): void {
@@ -76,14 +81,13 @@ export class EventoListaComponent {
   public confirm(): void {
     this.modalRef?.hide();
     this.toastr.success('O Evento foi deletado com sucesso!', 'Deletado');
-
   }
 
   public decline(): void {
     this.modalRef?.hide();
   }
 
-  public detalheEvento(id: number): void{
+  public detalheEvento(id: number): void {
     this.router.navigate([`eventos/detalhe/${id}`]);
   }
 }

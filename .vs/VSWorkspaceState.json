@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\componentes",
+    "\\src\\app\\componentes\\eventos",
+    "\\src\\app\\componentes\\eventos\\evento-lista"
+  ],
+  "SelectedNode": "\\src\\app\\componentes\\eventos\\evento-lista\\evento-lista.component.html",
+  "PreviewInSolutionExplorer": false
+}

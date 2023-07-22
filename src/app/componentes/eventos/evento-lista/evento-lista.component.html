@@ -40,8 +40,7 @@
     <tbody *ngIf="eventos && eventos.length > 0">
       <tr *ngFor="let evento of eventosFiltrados" 
           (click)="detalheEvento(evento.id)" 
-           style="cursor: pointer;"
-           >
+           style="cursor: pointer;">
         <td class="d-none d-md-table-cell">
           <img [collapse]="!exibirImagem" [isAnimated]="true" src="/assets/{{evento.imagemURL}}"
             [style.width.px]="larguraImagem" [style.margin.px]="margemImagem">
@@ -51,7 +50,7 @@
         <td class="d-none d-md-table-cell">{{evento.local}}</td>
         <td>{{evento.dataEvento | DateFormatPipe}}</td>
         <td class="d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
-        <td class="d-none d-md-table-cell">{{evento.lotes[0].nome}}</td>
+        <td class="d-none d-md-table-cell">{{evento.lotes && evento.lotes.length > 0 ? evento.lotes[0].nome : ''}}</td>
         <td>       
           <button type="button" class="btn btn-danger btn-lg" tooltip="Deletar" (click)="openModal(template)">
             <i class="fa fa-trash"></i>
@@ -59,6 +58,7 @@
         </td>
       </tr>
     </tbody>
+
     <tfoot *ngIf="!eventos || eventos.length === 0">
       <tr>
         <td colspan="8" class="text-center">
