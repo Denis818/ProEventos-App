@@ -15,20 +15,14 @@ export class EventoService extends BaseService {
   }
 
   getEventos(): Observable<Evento[]> {
-    return this.SendHttpRequest('GET', this.Url).pipe(
-      map(response => response.dados)
-    );
+    return this.SendHttpRequest('GET', this.Url);
   }
 
   getEventosByTema(tema: string): Observable<Evento[]> {
-    return this.SendHttpRequest('GET', `${this.Url}/tema/${tema}`).pipe(
-      map(response => response.dados)
-    );
+    return this.SendHttpRequest('GET', `${this.Url}/tema/${tema}`);
   }
 
   getEventoById(id: number): Observable<Evento> {
-    return this.SendHttpRequest('GET', `${this.Url}/${id}`).pipe(
-      map(response => response.dados)
-    );
+    return this.SendHttpRequest('GET', `${this.Url}/${id}`);
   }
 }
