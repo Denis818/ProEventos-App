@@ -33,7 +33,7 @@ export abstract class BaseService {
   private ApiErrorMessage(error: any): void {
       error.error.Mensagens?.forEach((mensagem: any) => {
         if (mensagem.Tipo !== 200) {
-          console.error('API message: ' + mensagem.Descricao);
+          console.error('API error: ' + mensagem.Descricao);
         }
       });  
   }
