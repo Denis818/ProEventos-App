@@ -52,7 +52,6 @@ export class EventoListaComponent {
       evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
       evento.local.toLocaleLowerCase().indexOf(filtrarPor) !== -1
     );
-
   }
 
   public AlterarImagem(): void {
@@ -63,7 +62,7 @@ export class EventoListaComponent {
     this.eventoService.getEventos().subscribe({
       next: eventos => {
         this.eventos = eventos;
-        
+
         this.eventosFiltrados = this.eventos;
         this.spinner.hide();
       },
@@ -80,6 +79,7 @@ export class EventoListaComponent {
 
   public confirm(): void {
     this.modalRef?.hide();
+
     this.toastr.success('O Evento foi deletado com sucesso!', 'Deletado');
   }
 

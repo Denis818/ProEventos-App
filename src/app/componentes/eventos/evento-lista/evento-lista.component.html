@@ -9,7 +9,7 @@
         <input type="text" class="form-control" placeholder="Filtrar por Tema e Local" [(ngModel)]="filtroLista">
       </div>
     </div>
-   
+
     <div>
       <a class="d-flex btn btn-outline-primary" routerLink="/eventos/detalhe">
         <i class="fa fa-plus-circle my-1"></i>
@@ -38,9 +38,7 @@
       </tr>
     </thead>
     <tbody *ngIf="eventos && eventos.length > 0">
-      <tr *ngFor="let evento of eventosFiltrados" 
-          (click)="detalheEvento(evento.id)" 
-           style="cursor: pointer;">
+      <tr *ngFor="let evento of eventosFiltrados" (click)="detalheEvento(evento.id)" style="cursor: pointer;">
         <td class="d-none d-md-table-cell">
           <img [collapse]="!exibirImagem" [isAnimated]="true" src="/assets/{{evento.imagemURL}}"
             [style.width.px]="larguraImagem" [style.margin.px]="margemImagem">
@@ -51,7 +49,7 @@
         <td>{{evento.dataEvento | DateFormatPipe}}</td>
         <td class="d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
         <td class="d-none d-md-table-cell">{{evento.lotes[0].nome}}</td>
-        <td>       
+        <td>
           <button type="button" class="btn btn-danger btn-lg" tooltip="Deletar" (click)="openModal(template)">
             <i class="fa fa-trash"></i>
           </button>
@@ -72,7 +70,7 @@
 <ng-template #template>
   <div class="modal-body text-center">
     <p>Tem certeza que quer deletar este Evento?</p>
-    <button type="button" class="btn btn-default" (click)="confirm()">Sim</button>
+    <button type="button" class="btn btn-danger mr-2" (click)="confirm()">Sim</button>
     <button type="button" class="btn btn-primary" (click)="decline()">Não</button>
   </div>
 </ng-template>

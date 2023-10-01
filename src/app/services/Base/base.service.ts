@@ -9,6 +9,7 @@ export abstract class BaseService {
   constructor(private http: HttpClient) { }
 
   protected SendHttpRequest(metodo: string, url: string, dados: any = null, contentType: any = null): Observable<any> {
+    
     let request = this.http.request(metodo, url, {
       body: dados,
       headers: contentType ?? 'application/json'

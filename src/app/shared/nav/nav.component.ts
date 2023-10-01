@@ -29,7 +29,7 @@ export class NavComponent implements OnInit {
     this.darkMode = isDarkMode;
     localStorage.setItem('DARK_MODE', isDarkMode.toString());
     const themeLink = this.document.getElementById('theme-link') as HTMLLinkElement;
-    
+
     if (isDarkMode) {
       themeLink.href = '../../../assets/themes/bootstrap-darkly.min.css';
       this.renderer.addClass(this.document.body, 'dark');
